@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>My Application | Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+	<link href="assets/css/css" rel="stylesheet" type="text/css">
+	<link href="assets/css/nifty.min.css" rel="stylesheet">
+	<link href="assets/css/nifty-demo-icons.min.css" rel="stylesheet">
+	<link href="assets/css/pace.min.css" rel="stylesheet">
+	<link href="assets/css/nifty-demo.min.css" rel="stylesheet">
+
+    <script type="text/javascript" src="assets/js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container colored">
+    <!-- Custom Navbar - START -->
+    <div class="container mix">
+        <nav class="navbar navbar-custom">
+            <div class="container" style="margin-top:8px; margin-left:100px;">
+                <span class="headline" style="ma">Show commom files</span>
+                <a href="/signout" style="color: white; font-size: 15px; margin-top: 10px; margin-left: 50rem" >Sign out</a>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container demo">
+        <div class="col-md-6">
+            <span><h3>Shared:</h3></span>
+            <div class="fluid file-panel" style="height: 500px;  overflow: scroll;">
+                <input type="hidden" id="path" value="{{ path }}">
+                <ul id="demo-mail-list" class="file-list">
+                    <!--File shared by another user list item-->
+                    {% for item in sharedbyitems %}
+                        <li>
+                            <div class="file-settings" style="font-size: 20px">
+                                <a href="/download/{{ item.blob_key }}/{{ item.name }}" data-toggle="tooltip" data-placement="bottom" title="Download">
+                                    <i class="fa fa-download" ></i>
+                                </a>
+                            </div>
+
+                            <div class="file-attach-icon"></div>
+                            <a href="" class="file-details">
+                                <div class="media-block">
+                                    {% if item.name != '..'%}
+                                        <div class="media-left"><i class="fa fa-file"></i></div>
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <p class="file-name">{{ item.name }}</p>
+                                        <small>{{ item.time }} | {{ item.size }}KB--------------------shared by {{ item.client }}</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <span><h3>My Share:</h3></span>
+            <div class="fluid file-panel" style="height: 500px;  overflow: scroll;">
+                <input type="hidden" id="path" value="{{ path }}">
+                <ul id="demo-mail-list" class="file-list">
+                    <!--File shared by another user list item-->
+                    {% for item in shareitems %}
+                        <li>
+                            <div class="file-settings">
+                                <div class="collapse navbar-collapse" id="navbar" >
+
+                                </div>
+                            </div>
+
+                            <div class="file-attach-icon"></div>
+                            <a href="" class="file-details">
+                                <div class="media-block">
+                                    {% if item.name != '..'%}
+                                        <div class="media-left"><i class="fa fa-file"></i></div>
+                                    {% endif %}
+                                    <div class="media-body">
+                                        <p class="file-name">{{ item.name }}</p>
+                                        <small>{{ item.time }} | {{ item.size }}KB--------------------share to {{ item.host }}</small>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="margin-top: 25px;">
+        <div class="col-md-10"></div>
+        <a class="btn col-md-1" style="background: #488cf6; color: white" role="button" href="/?path=">Go Home</a>
+    </div>
+
+</div>
+
+<style type="text/css">
+    .demo div {
+        clear: none;
+    }
+</style>
+
+</body>
+</html>
